@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./grid.css">
+    <link rel="stylesheet" href="./icon/fontawesome-free-6.0.0-beta3-web/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.google.com/share?selection.family=Cabin:ital,wght@0,430;0,700;1,400;1,500;1,600;1,700%7CRoboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,500">
+    <title>Game Tai Xiu</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header__my-money--container">
+        <p id="current_money"></p>
+        </div>
+    </div>
+   
+    <div class="main-page__container">
+        <div class="input__zone">
+            <p class="input__zone-title" id="input__zone-title">Số tiền cược là: <p id="input__zone-money">0</p></p>
+            
+            <div class="choice-and-bet">
+                <button class="person-choice person-choice1">Tài</button>
+                <div class="dice-container">
+                    <div class="dice-wrapper">
+                        <img src="./imgs/dice-six-faces-one.png" alt="dice 1" id="dice1">
+                        <img src="./imgs/dice-six-faces-two.png" alt="dice 2" id="dice2">
+                    </div>
+                    <input min="0" type="number" name="bet money" placeholder="Nhập số tiền cược" id="bet-money" step="100000" class="bet-money">
+                </div>
+                <button class="person-choice person-choice2">Xỉu</button>
+            </div>
+           
+        </div>
+
+    </div>
+    <div id="overlay" class="overlay">
+        <div id="result__container" class="result__container">
+            <!-- win -->
+            <p id="result__container-title"></p>
+            <div class="button-container">
+                <p id="result-money">0</p>
+                <button class="result-btn result-btn-continues" ><span class="front">Chơi tiếp</span></button>
+                <button class="result-btn result-btn-end" ><span class="front">Nghỉ</span></button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="./main.js"></script>
+</body>
+</html>
