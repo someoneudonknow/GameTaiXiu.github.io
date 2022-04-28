@@ -38,6 +38,7 @@ let diceImages = [
     './imgs/dice-six-faces-six.png'
 ];
 
+
 let dice = document.querySelectorAll("img");
 
 // 
@@ -52,11 +53,14 @@ const resultContent = document.getElementById('result__container-title');
 const betMoneyAmount = document.getElementById('result-money');
 var continuebtn = document.querySelectorAll('.result-btn');
 var current_money = document.getElementById('current_money');
-
+var startingTime = document.getElementById('countDown_timer');
+var allInBtn = document.getElementById('all-in-btn');
+var time =  5;
 var myMoney = 1000000;
 
 betMoney.setAttribute("max",myMoney);
 current_money.innerHTML = myMoney + ' vnđ';
+startingTime.innerHTML = time;
 
 function modalOpen(){
     overlay.classList.add("modal-open");
@@ -77,6 +81,14 @@ function rollTheDice(){
         die.classList.add("shake");
     });
 
+    var timer = setInterval(function(){
+        time--;
+        if(time <= 0){
+            time = 0;
+        }
+        startingTime.innerHTML = time;
+    },1000);
+
     personChoicebtn1.disabled = true;
     personChoicebtn2.disabled = true;
     betMoney.disabled = true;
@@ -90,6 +102,8 @@ function rollTheDice(){
             die.classList.remove("shake");
         });
         
+        clearInterval(timer);
+
         document.querySelector("#dice1").setAttribute("src",diceImages[dice1]);
         document.querySelector("#dice2").setAttribute("src",diceImages[dice2]);
         
@@ -101,7 +115,8 @@ function rollTheDice(){
             personChoicebtn1.disabled = false;
             personChoicebtn2.disabled = false;
             betMoney.disabled = false;
-
+            time = 5;
+            startingTime.innerHTML = time;
             current_money.innerHTML = myMoney + ' vnđ';
         },1500);
         
@@ -139,15 +154,19 @@ function rightValue(value){
         alert('Nhập số tiền cược');
     }else if(value > myMoney){
         alert('Số tiền không đủ');
-        betMoney.value = 0;
+        betMoney.value = null;
     }else{
         return true;
     }
 }
 
+allInBtn.addEventListener('click',function(){
+    betMoney.value = myMoney;
+});
+
 personChoicebtn1.addEventListener('click',function(){   
         let val = betMoney.value;
-        if(rightValue(val) == true){
+        if(rightValue(val)){
             content.innerHTML = val  + ' vnđ';
             if(rollTheDice() %2 == 0){
                     addAndRemove('win', 'lose');
@@ -161,7 +180,7 @@ personChoicebtn1.addEventListener('click',function(){
 
 personChoicebtn2.addEventListener('click',function(){             
     let val = betMoney.value; 
-        if(rightValue(val) == true){
+        if(rightValue(val)){
             content.innerHTML = val  + ' vnđ';         
             if(rollTheDice() % 2 != 0){
                 addAndRemove('win', 'lose');
@@ -176,7 +195,7 @@ personChoicebtn2.addEventListener('click',function(){
 
 for(const btn of continuebtn){
     btn.addEventListener('click',function(){
-        betMoney.value = 0;
+        betMoney.value = null;
         content.innerHTML = betMoney.value  + ' vnđ';
         modalClose();
     });
